@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import SearchPage from './pages/SearchPage';
+import DashboardPage from './pages/DashboardPage';
+import InventoryManagementPage from './pages/InventoryManagementPage';
 import SellersPage from './pages/SellersPage';
-import AboutPage from './pages/AboutPage';
 
 const App: React.FC = () => {
   return (
@@ -12,13 +12,14 @@ const App: React.FC = () => {
         <Header />
         <main style={styles.main}>
           <Routes>
-            <Route path="/" element={<SearchPage />} />
+            <Route path="/" element={<DashboardPage />} />
+            <Route path="/inventory" element={<InventoryManagementPage />} />
             <Route path="/sellers" element={<SellersPage />} />
-            <Route path="/about" element={<AboutPage />} />
+            <Route path="/pos-integrations" element={<DashboardPage />} />
           </Routes>
         </main>
         <footer style={styles.footer}>
-          <p>© 2024 Local TCG Marketplace - Helping players find cards locally</p>
+          <p>© 2024 Local TCG Marketplace Admin Portal</p>
         </footer>
       </div>
     </BrowserRouter>

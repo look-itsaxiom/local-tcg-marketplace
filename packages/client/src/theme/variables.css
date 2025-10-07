@@ -1,0 +1,46 @@
+/* Core CSS required for Ionic components to work properly */
+@import '@ionic/react/css/core.css';
+
+/* Basic CSS for apps built with Ionic */
+@import '@ionic/react/css/normalize.css';
+@import '@ionic/react/css/structure.css';
+@import '@ionic/react/css/typography.css';
+
+/* Optional CSS utils that can be commented out */
+@import '@ionic/react/css/padding.css';
+@import '@ionic/react/css/float-elements.css';
+@import '@ionic/react/css/text-alignment.css';
+@import '@ionic/react/css/text-transformation.css';
+@import '@ionic/react/css/flex-utils.css';
+@import '@ionic/react/css/display.css';
+
+/* Custom theme variables */
+:root {
+  --ion-color-primary: #2c3e50;
+  --ion-color-primary-rgb: 44, 62, 80;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #273546;
+  --ion-color-primary-tint: #415162;
+
+  --ion-color-secondary: #3498db;
+  --ion-color-secondary-rgb: 52, 152, 219;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #2e86c1;
+  --ion-color-secondary-tint: #48a3df;
+
+  --ion-color-success: #28a745;
+  --ion-color-warning: #ffc107;
+  --ion-color-danger: #dc3545;
+
+  --ion-background-color: #f8f9fa;
+  --ion-text-color: #212529;
+}
+
+/* Leaflet map fixes */
+.leaflet-container {
+  font-family: inherit;
+  height: 100%;
+  width: 100%;
+}

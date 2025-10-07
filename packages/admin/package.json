@@ -1,7 +1,7 @@
 {
-  "name": "@local-tcg/frontend",
+  "name": "@local-tcg/admin",
   "version": "1.0.0",
-  "description": "Frontend app for local-tcg-marketplace",
+  "description": "Admin portal for sellers and administrators",
   "private": true,
   "scripts": {
     "dev": "vite",

@@ -7,12 +7,14 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:admin\" \"npm run dev:client\"",
     "dev:backend": "npm run dev --workspace=@local-tcg/backend",
-    "dev:frontend": "npm run dev --workspace=@local-tcg/frontend",
+    "dev:admin": "npm run dev --workspace=@local-tcg/admin",
+    "dev:client": "npm run dev --workspace=@local-tcg/client",
     "build": "npm run build --workspaces",
     "build:backend": "npm run build --workspace=@local-tcg/backend",
-    "build:frontend": "npm run build --workspace=@local-tcg/frontend",
+    "build:admin": "npm run build --workspace=@local-tcg/admin",
+    "build:client": "npm run build --workspace=@local-tcg/client",
     "test": "npm run test --workspaces",
     "lint": "npm run lint --workspaces",
     "format": "prettier --write \"packages/**/*.{ts,tsx,json,md}\""

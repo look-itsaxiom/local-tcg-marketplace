@@ -7,18 +7,21 @@ const Header: React.FC = () => {
       <div style={styles.container}>
         <h1 style={styles.logo}>
           <Link to="/" style={styles.logoLink}>
-            🃏 Local TCG Marketplace
+            🔧 TCG Marketplace Admin
           </Link>
         </h1>
         <nav style={styles.nav}>
           <Link to="/" style={styles.navLink}>
-            Search
+            Dashboard
+          </Link>
+          <Link to="/inventory" style={styles.navLink}>
+            Inventory
           </Link>
           <Link to="/sellers" style={styles.navLink}>
             Sellers
           </Link>
-          <Link to="/about" style={styles.navLink}>
-            About
+          <Link to="/pos-integrations" style={styles.navLink}>
+            POS Integrations
           </Link>
         </nav>
       </div>
