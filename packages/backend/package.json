@@ -10,9 +10,13 @@
     "lint": "eslint src --ext .ts",
     "test": "jest",
     "migrate": "node -r ts-node/register src/utils/migrate.ts",
-    "seed": "ts-node src/scripts/seed.ts"
+    "seed": "ts-node src/config/database.ts && ts-node src/scripts/seed.ts"
   },
-  "keywords": ["tcg", "marketplace", "api"],
+  "keywords": [
+    "tcg",
+    "marketplace",
+    "api"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
