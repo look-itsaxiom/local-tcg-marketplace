@@ -20,14 +20,15 @@ A fullstack TypeScript-based SaaS starter for building a local-first TCG (Tradin
 
 ## 🏗️ Project Structure
 
-This is a monorepo containing three packages:
+This is a monorepo containing four packages:
 
 ```
 local-tcg-marketplace/
 ├── packages/
 │   ├── shared/          # Shared TypeScript types and utilities
 │   ├── backend/         # Node.js/Express API server
-│   └── frontend/        # React web application
+│   ├── admin/           # Admin portal (React + Vite)
+│   └── client/          # Mobile app (Ionic + Capacitor)
 ├── package.json         # Root package configuration
 └── README.md
 ```
@@ -60,10 +61,16 @@ cp packages/backend/.env.example packages/backend/.env
 # Edit packages/backend/.env with your settings
 ```
 
-**Frontend** (`packages/frontend/.env`):
+**Admin Portal** (`packages/admin/.env`):
 ```bash
-cp packages/frontend/.env.example packages/frontend/.env
-# Edit packages/frontend/.env with your settings
+cp packages/admin/.env.example packages/admin/.env
+# Edit packages/admin/.env with your settings
+```
+
+**Client App** (`packages/client/.env`):
+```bash
+cp packages/client/.env.example packages/client/.env
+# Edit packages/client/.env with your settings
 ```
 
 4. Build the shared package:
@@ -78,13 +85,14 @@ npm run dev
 
 This will start:
 - Backend API on `http://localhost:3001`
-- Frontend app on `http://localhost:3000`
+- Admin Portal on `http://localhost:3000`
+- Client App on `http://localhost:3002`
 
 ## 📦 Package Details
 
 ### Shared (`@local-tcg/shared`)
 
-Contains TypeScript types and interfaces shared between frontend and backend:
+Contains TypeScript types and interfaces shared between all packages:
 - Card types
 - Inventory models
 - Seller information
@@ -122,27 +130,45 @@ Node.js/Express API server with:
 - `POST /api/pos/sync/:integrationId` - Trigger inventory sync
 - `GET /api/pos/sync-logs/:integrationId` - Get sync logs
 
-### Frontend (`@local-tcg/frontend`)
+### Admin Portal (`@local-tcg/admin`)
 
-React web application with:
-- Card search interface
-- Interactive maps (Leaflet)
-- Seller directory
-- Responsive design
-- Geolocation support
-- Real-time search results
+React web application for sellers and administrators:
+- Dashboard with statistics and quick actions
+- Inventory management (CRUD operations)
+- Seller management
+- POS integration configuration
+- Real-time sync monitoring
+- Admin-focused UI with management controls
 
 **Pages:**
-- `/` - Search page with filters
-- `/sellers` - Seller directory
-- `/about` - About the platform
+- `/` - Admin dashboard
+- `/inventory` - Inventory management
+- `/sellers` - Seller management
+- `/pos-integrations` - POS integration settings
+
+### Client App (`@local-tcg/client`)
+
+Ionic/Capacitor mobile application for end users:
+- Card search interface with filters
+- Nearby seller discovery
+- Interactive maps (Leaflet)
+- Native mobile capabilities (geolocation, camera, etc.)
+- Tab-based navigation
+- Cross-platform support (PWA, Android, iOS)
+
+**Features:**
+- Native geolocation via Capacitor
+- Optimized for mobile screens
+- Offline-capable PWA
+- Push notification support (via plugins)
+- Camera and photo library access
 
 ## 🛠️ Development
 
 ### Available Scripts
 
 **Root level:**
-- `npm run dev` - Start both frontend and backend in development mode
+- `npm run dev` - Start backend, admin portal, and client app in development mode
 - `npm run build` - Build all packages
 - `npm run test` - Run tests in all packages
 - `npm run lint` - Lint all packages
@@ -150,9 +176,16 @@ React web application with:
 
 **Individual packages:**
 - `npm run dev:backend` - Start backend only
-- `npm run dev:frontend` - Start frontend only
+- `npm run dev:admin` - Start admin portal only  
+- `npm run dev:client` - Start client app only
 - `npm run build:backend` - Build backend only
-- `npm run build:frontend` - Build frontend only
+- `npm run build:admin` - Build admin portal only
+- `npm run build:client` - Build client app only
+
+**Mobile app specific:**
+- `npm run build:android --workspace=@local-tcg/client` - Build for Android
+- `npm run build:ios --workspace=@local-tcg/client` - Build for iOS
+- `npm run sync --workspace=@local-tcg/client` - Sync web assets to native projects
 
 ### Database
 

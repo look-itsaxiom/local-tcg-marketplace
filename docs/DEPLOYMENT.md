@@ -88,16 +88,16 @@ web: cd packages/backend && npm start
 
 3. **Deploy using platform CLI or Git**
 
-## Frontend Deployment
+## Admin Portal Deployment
 
 ### Option 1: Static Hosting (Vercel, Netlify)
 
-1. **Build the frontend:**
+1. **Build the admin portal:**
 ```bash
-npm run build:frontend
+npm run build:admin
 ```
 
-2. **Deploy the `packages/frontend/dist` directory**
+2. **Deploy the `packages/admin/dist` directory**
 
 3. **Configure environment variables:**
 ```env
@@ -111,35 +111,35 @@ VITE_DEFAULT_RADIUS_MILES=25
 4. **For Vercel:**
 ```bash
 npm install -g vercel
-cd packages/frontend
+cd packages/admin
 vercel --prod
 ```
 
 5. **For Netlify:**
 ```bash
 npm install -g netlify-cli
-cd packages/frontend
+cd packages/admin
 netlify deploy --prod --dir=dist
 ```
 
 ### Option 2: Traditional Web Server (Nginx)
 
-1. **Build the frontend:**
+1. **Build the admin portal:**
 ```bash
-npm run build:frontend
+npm run build:admin
 ```
 
 2. **Copy files to web server:**
 ```bash
-scp -r packages/frontend/dist/* user@server:/var/www/html/
+scp -r packages/admin/dist/* user@server:/var/www/admin/
 ```
 
 3. **Configure Nginx:**
 ```nginx
 server {
     listen 80;
-    server_name yourdomain.com;
-    root /var/www/html;
+    server_name admin.yourdomain.com;
+    root /var/www/admin;
     index index.html;
 
     location / {
@@ -151,6 +151,90 @@ server {
     }
 }
 ```
+
+## Client App Deployment
+
+### Option 1: PWA (Progressive Web App)
+
+1. **Build the client app:**
+```bash
+npm run build:client
+```
+
+2. **Deploy the `packages/client/dist` directory** to static hosting (Vercel, Netlify, etc.)
+
+3. **Configure environment variables:**
+```env
+VITE_API_BASE_URL=https://api.yourdomain.com/api
+```
+
+### Option 2: Android App
+
+1. **Add Android platform:**
+```bash
+cd packages/client
+npx cap add android
+```
+
+2. **Build the web assets:**
+```bash
+npm run build
+```
+
+3. **Sync to Android:**
+```bash
+npx cap sync android
+```
+
+4. **Open in Android Studio:**
+```bash
+npx cap open android
+```
+
+5. **Build APK/AAB in Android Studio** or use command line:
+```bash
+cd android
+./gradlew assembleRelease
+```
+
+### Option 3: iOS App
+
+1. **Add iOS platform:**
+```bash
+cd packages/client
+npx cap add ios
+```
+
+2. **Build the web assets:**
+```bash
+npm run build
+```
+
+3. **Sync to iOS:**
+```bash
+npx cap sync ios
+```
+
+4. **Open in Xcode:**
+```bash
+npx cap open ios
+```
+
+5. **Build and archive in Xcode** for App Store distribution
+
+### Publishing to App Stores
+
+**Google Play Store:**
+- Create a developer account
+- Generate signing keys
+- Build release AAB
+- Upload to Google Play Console
+
+**Apple App Store:**
+- Create Apple Developer account
+- Configure provisioning profiles
+- Build and archive in Xcode
+- Submit via App Store Connect
 
 ## Database
 

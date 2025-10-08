@@ -12,7 +12,8 @@ npm run build --workspace=@local-tcg/shared
 
 # 3. Set up environment variables
 cp packages/backend/.env.example packages/backend/.env
-cp packages/frontend/.env.example packages/frontend/.env
+cp packages/admin/.env.example packages/admin/.env
+cp packages/client/.env.example packages/client/.env
 
 # 4. Seed the database with sample data
 cd packages/backend && npm run seed && cd ../..
@@ -22,14 +23,15 @@ npm run dev
 ```
 
 Visit:
-- Frontend: http://localhost:3000
+- Admin Portal: http://localhost:3000
+- Client App: http://localhost:3002
 - Backend API: http://localhost:3001
 - Health Check: http://localhost:3001/health
 
 ## 📦 Available Scripts
 
 ### Root Level
-- `npm run dev` - Start both frontend and backend
+- `npm run dev` - Start backend, admin portal, and client app
 - `npm run build` - Build all packages
 - `npm run test` - Run tests in all packages
 - `npm run lint` - Lint all packages
@@ -40,9 +42,16 @@ Visit:
 - `npm run build:backend` - Build backend
 - `npm run seed --workspace=@local-tcg/backend` - Seed database
 
-### Frontend Only
-- `npm run dev:frontend` - Start frontend dev server
-- `npm run build:frontend` - Build frontend for production
+### Admin Portal Only
+- `npm run dev:admin` - Start admin portal dev server
+- `npm run build:admin` - Build admin portal for production
+
+### Client App Only
+- `npm run dev:client` - Start client app dev server
+- `npm run build:client` - Build client app for web/PWA
+- `npm run build:android --workspace=@local-tcg/client` - Build for Android
+- `npm run build:ios --workspace=@local-tcg/client` - Build for iOS
+- `npm run sync --workspace=@local-tcg/client` - Sync to native projects
 
 ## 🗂️ Project Structure
 
@@ -64,18 +73,29 @@ local-tcg-marketplace/
 │   │   │   └── index.ts     # Server entry point
 │   │   └── package.json
 │   │
-│   └── frontend/            # React Application
+│   ├── admin/               # Admin Portal (React + Vite)
+│   │   ├── src/
+│   │   │   ├── components/  # React components
+│   │   │   ├── pages/       # Page components (Dashboard, Inventory, etc.)
+│   │   │   ├── services/    # API client
+│   │   │   ├── hooks/       # Custom React hooks
+│   │   │   └── App.tsx      # Main app component
+│   │   └── package.json
+│   │
+│   └── client/              # Mobile App (Ionic + Capacitor)
 │       ├── src/
-│       │   ├── components/  # React components
-│       │   ├── pages/       # Page components
+│       │   ├── pages/       # Ionic pages
 │       │   ├── services/    # API client
-│       │   ├── hooks/       # Custom React hooks
-│       │   └── App.tsx      # Main app component
+│       │   ├── hooks/       # Custom hooks (geolocation, etc.)
+│       │   ├── theme/       # Ionic theme variables
+│       │   └── App.tsx      # Main app with tabs
+│       ├── capacitor.config.ts  # Capacitor configuration
 │       └── package.json
 │
 ├── docs/                    # Documentation
 │   ├── API.md              # API documentation
-│   └── DEPLOYMENT.md       # Deployment guide
+│   ├── DEPLOYMENT.md       # Deployment guide
+│   └── QUICK_START.md      # Quick start guide
 │
 ├── README.md               # Main documentation
 ├── CONTRIBUTING.md         # Contribution guidelines
@@ -90,11 +110,18 @@ local-tcg-marketplace/
 - `packages/backend/src/routes/search.ts` - Geo-search implementation
 - `packages/backend/src/scripts/seed.ts` - Sample data generator
 
-### Frontend
-- `packages/frontend/src/App.tsx` - Main app with routing
-- `packages/frontend/src/pages/SearchPage.tsx` - Main search interface
-- `packages/frontend/src/services/api.ts` - API client
-- `packages/frontend/src/components/MapView.tsx` - Leaflet map integration
+### Admin Portal
+- `packages/admin/src/App.tsx` - Main app with routing
+- `packages/admin/src/pages/DashboardPage.tsx` - Admin dashboard
+- `packages/admin/src/pages/InventoryManagementPage.tsx` - Inventory CRUD
+- `packages/admin/src/services/api.ts` - API client
+
+### Client App
+- `packages/client/src/App.tsx` - Main app with Ionic tabs
+- `packages/client/src/pages/SearchPage.tsx` - Card search interface
+- `packages/client/src/pages/SellersPage.tsx` - Seller directory
+- `packages/client/src/hooks/useGeolocation.ts` - Capacitor geolocation hook
+- `packages/client/capacitor.config.ts` - Native app configuration
 
 ### Shared
 - `packages/shared/src/types.ts` - All TypeScript interfaces
