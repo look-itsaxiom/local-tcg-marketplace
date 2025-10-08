@@ -1,0 +1,31 @@
+{
+  "name": "local-tcg-marketplace",
+  "version": "1.0.0",
+  "description": "Local-first TCG singles marketplace - helping players find and pick up individual cards from nearby stores",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:admin\" \"npm run dev:client\"",
+    "dev:backend": "npm run dev --workspace=@local-tcg/backend",
+    "dev:admin": "npm run dev --workspace=@local-tcg/admin",
+    "dev:client": "npm run dev --workspace=@local-tcg/client",
+    "build": "npm run build --workspaces",
+    "build:backend": "npm run build --workspace=@local-tcg/backend",
+    "build:admin": "npm run build --workspace=@local-tcg/admin",
+    "build:client": "npm run build --workspace=@local-tcg/client",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces",
+    "format": "prettier --write \"packages/**/*.{ts,tsx,json,md}\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
